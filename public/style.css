@@ -1,0 +1,329 @@
+#console {
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    border: 2px solid black;
+    border-radius: 1vh;
+    box-sizing: border-box;
+}
+
+#DIV_message {
+    display: flex;
+    align-items: center;
+    height: 10vh;
+}
+
+#horizonContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    grid-column: 1;
+    grid-row: 6;
+    box-sizing: border-box;
+}
+
+#horizonCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    /* taille de ton curseur */
+    height: 100px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    /* pour ne pas gêner la souris */
+}
+
+.dashboard {
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    /* ← évite les débordements */
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 12px;
+    padding: 12px;
+    background: #222;
+    box-sizing: border-box;
+}
+
+
+.panel {
+    background: #000000;
+    border: 4px solid #666;
+    padding: 10px;
+    color: #c5c5c5;
+    font-family: monospace;
+    box-shadow: inset 0 0 10px #333;
+    position: relative;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    /* empêche les scrolls */
+    box-sizing: border-box;
+}
+
+#viewportDIV {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    grid-column: 2/7;
+    grid-row: 2/7;
+    box-sizing: border-box;
+
+}
+
+#viewport {
+    position: absolute;
+    width: 99%;
+    height: 99%;
+    display: block;
+    z-index: 1;
+
+
+}
+
+#videoLegend {
+    position: absolute;
+    width: 99%;
+    height: 99%;
+
+    z-index: 2;
+
+}
+
+#videoView {
+    position: absolute;
+    width: 99%;
+    height: 99%;
+    z-index: 1;
+}
+
+#switchView {
+    position: absolute;
+    z-index: 3;
+    border: solid;
+    height: 5%;
+    font-size: large;
+    border-radius: 2vh;
+}
+
+#cameraCtrlDIV {
+    position: absolute;
+    z-index: 2;
+    right: 10%;
+    bottom: 10%;
+}
+
+
+.dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100px;
+    margin: 20px auto;
+}
+
+.middle-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#INSpanel {
+    height: 20vh;
+}
+
+#GPSdiv {
+    display: flex;
+}
+
+.MODULEdiv {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin: 10px;
+    margin-left: auto;
+}
+
+.MODULEbt {
+    flex: 1;
+    height: 60px;
+    /* ou 100% si tu veux que ça remplisse verticalement */
+}
+
+#pageDIV {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: ; */
+    z-index: 2;
+    height: fit-content;
+    width: fit-content;
+    visibility: hidden;
+}
+
+.INSparamDIV {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0;
+    padding: 8px 12px;
+    background-color: #111;
+    border: 2px solid #555;
+    border-radius: 2px;
+    font-family: monospace;
+}
+
+
+.INSparamDIV h4 {
+    margin: 2vh;
+    font-size: 17px;
+    font-weight: normal;
+    color: #c0c0c0;
+
+}
+
+.INSparamDIV input.INSparamBt {
+    width: 80px;
+    padding: 3px 5px;
+    font-size: 13px;
+    border: 1px solid #555;
+    background-color: #111;
+    color: #c0c0c0;
+    border-radius: 0;
+
+    outline: none;
+}
+
+.INSparamDIV input.INSparamBt:focus {
+    border-color: #aaa;
+
+}
+
+#pageDIV button {
+    background-color: #111;
+    font-size: larger;
+    color: #c0c0c0;
+    border: 1px solid #555;
+
+}
+
+.gauge {
+    margin: 2vh;
+    position: relative;
+}
+
+.gauge img.cadran {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    /* nécessaire pour z-index */
+    z-index: 1;
+    /* cadran en dessous */
+}
+
+.gauge img.needle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 50%;
+    z-index: 2;
+    /* aiguille au-dessus */
+}
+
+
+
+#gauge_TEMP {
+    width: 40%;
+}
+
+#ALTpanel {
+    display: flex;
+    /* active flexbox */
+    flex-direction: row;
+    /* les enfants côte à côte */
+    align-items: center;
+    /* aligne verticalement */
+    justify-content: space-between;
+    /* espace entre eux */
+
+}
+
+#navGaugePanel {
+    grid-column: 1;
+    grid-row: 2/6;
+}
+
+#gauge_ALT {
+    width: 60%;
+}
+
+#gauge_VS {
+    width: 35%;
+}
+
+#gauge_ACC {
+
+    width: 50%;
+
+}
+
+#needle_ACC {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#navPanel {
+    grid-column: 4/7;
+    grid-row: 1;
+}
+
+.btn-emergency {
+
+    height: 100%;
+    aspect-ratio: 1 / 1;
+
+    background-image: url("texture/emergency_stop.png");
+    background-size: cover;
+    /* l’image remplit le bouton */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: none;
+    cursor: pointer;
+}

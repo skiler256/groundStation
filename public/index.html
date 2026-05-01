@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="dashboard" style="position: absolute; z-index: 1;">
+        <div class="panel">
+
+            <p id="console"></p>
+            <div id="DIV_message">
+
+                <div class="gauge" id="gauge_TEMP">
+                    <img src="texture/gauge/TEMP.png" class="cadran" alt="">
+                    <img src="texture/gauge/cross.png" class="needle" id="needle_TEMP" alt="">
+                </div>
+                <div class="motor-gauges">
+                    <div class="motor">
+                        <meter min="0" max="100" value="70" id="M1"></meter>
+                        <span>M1</span>
+                    </div>
+
+                    <div class="motor">
+                        <meter min="0" max="100" value="55" id="M2"></meter>
+                        <span>M2</span>
+                    </div>
+
+                    <div class="motor">
+                        <meter min="0" max="100" value="85" id="M3"></meter>
+                        <span>M3</span>
+                    </div>
+
+                    <div class="motor">
+                        <meter min="0" max="100" value="40" id="M4"></meter>
+                        <span>M4</span>
+                    </div>
+                </div>
+                <button onclick="unlockSounds();">ALARM</button>
+            </div>
+
+        </div>
+
+        <div class="panel" id="navGaugePanel">
+            <div id="ALTpanel">
+                <div class="gauge" id="gauge_ALT">
+                    <img src="texture/gauge/ALT.png" class="cadran" alt="">
+                    <img src="texture/gauge/cross.png" class="needle" id="needle_ALT" alt="">
+                </div>
+                <div class="gauge" id="gauge_VS">
+                    <img src="texture/gauge/VS.png" class="cadran" alt="">
+                    <img src="texture/gauge/cross.png" class="needle" id="needle_VS" alt="">
+
+                </div>
+            </div>
+            <div id="ALTpanel">
+                <div class="gauge" id="gauge_ACC">
+                    <img src="texture/gauge/ACC.png" class="cadran" alt="">
+                    <img src="texture/gauge/ACCcross.png" class="needle" id="needle_ACC" alt="">
+
+                </div>
+                <div>
+                    <h3 id="Xcoord"></h3>
+                    <h3 id="Ycoord"></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class=" panel" id="horizonContainer">
+            <canvas id="horizonCanvas"></canvas>
+            <img id="crosshair" src="texture/crosshair.png" />
+        </div>
+        <div class="panel" id="INSpanel">
+            <div id="GPSdiv">
+                <div id="satIcons"></div>
+                <canvas id="satsCanva" width="auto" height="auto"></canvas>
+            </div>
+            <div><button class="INSbutton" id="calZbt" onclick="socket.send('PROCALZ');">Calibrer<br>GPS/Alt.</button>
+                <button class="INSbutton" onclick="socket.send('PROUSEINSSAVE');">charger
+                    anciens<br>paramètres</button>
+                <button class="INSbutton" onclick="setINS();">Parametres<br>INS</button>
+            </div>
+        </div>
+
+        <div class="panel" id="MODULEpanel">
+
+            <div class="MODULEdiv">
+                <button class="MODULEbt" id="BMP" onclick="socket.send('LAUBMP');">BMP</button>
+                <button class="MODULEbt" id="GPS" onclick="socket.send('LAUGPS');">GPS</button>
+                <button class="MODULEbt" id="TEL" onclick=" socket.send('LAUTEL');">TEL</button>
+                <button class="MODULEbt" id="GIM" onclick="socket.send('LAUGIM');">GIM</button>
+            </div>
+            <div class="MODULEdiv">
+                <button class="MODULEbt" id="INS" onclick="socket.send('LAUINS');">INS</button>
+                <button class="MODULEbt" id="ESP" onclick="socket.send('LAUESP');">ESP</button>
+            </div>
+        </div>
+
+
+        <div class="panel" id="viewportDIV">
+            <canvas id="viewport"></canvas>
+            <button id="switchView" onclick="switchView();">Changer de vue</button>
+            <img src="http://10.5.0.2:9002/" alt="Flux vidéo" id="videoView" />
+
+            <div id="videoLegend">
+                <div id="cameraCtrlDIV">
+                    <select id="gimballMode" name="mode">
+                        <option value="LAND">atterisage</option>
+                        <option value="STAB">stablisé</option>
+                        <option value="HORIZONTAL">horizontal</option>
+                    </select>
+                    <div class="dpad">
+                        <button class="btn up" onclick="socket.send('GIMUP');">▲</button>
+                        <div class="middle-row">
+                            <button class="btn left" onclick="socket.send('GIMLEFT');">◀</button>
+                            <button class="btn right" onclick="socket.send('GIMRIGHT');">▶</button>
+                        </div>
+                        <button class="btn down" onclick="socket.send('GIMDOWN');">▼</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel" id="navPanel">
+            <button class="btn-emergency" onclick="socket.send('MOTAAA');"></button>
+
+        </div>
+    </div>
+    <div id="pageDIV">
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+<script src="scriptSATS.js"></script>
+<script src="script.js"></script>
+<script src="scriptSound.js"></script>
+
+
+
+</html>
